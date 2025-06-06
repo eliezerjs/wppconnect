@@ -57,8 +57,10 @@ export function initServer(serverOptions: Partial<ServerOptions>): {
   setMaxListners(serverOptions as ServerOptions);
 
   const app = express();
-  const PORT = process.env.PORT || serverOptions.port;
-
+  
+  const PORT = process.env.PORT || serverOptions.port || 3000;
+  const HOST = '0.0.0.0';
+  
   app.use(cors());
   app.use(express.json({ limit: '50mb' }));
   app.use(express.urlencoded({ limit: '50mb', extended: true }));
