@@ -118,9 +118,6 @@ export function initServer(serverOptions: Partial<ServerOptions>): {
     });
   });
 
-  const PORT = process.env.PORT || serverOptions.port || 3000;
-	const HOST = '0.0.0.0';
-
 	http.listen(PORT, HOST, () => {
 	  logger.info(`Server is running at http://${HOST}:${PORT}`);
 	  logger.info(
