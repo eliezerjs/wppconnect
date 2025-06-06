@@ -116,15 +116,18 @@ export function initServer(serverOptions: Partial<ServerOptions>): {
     });
   });
 
-  http.listen(PORT, () => {
-    logger.info(`Server is running on port: ${PORT}`);
-    logger.info(
-      `\x1b[31m Visit ${serverOptions.host}:${PORT}/api-docs for Swagger docs`
-    );
-    logger.info(`WPPConnect-Server version: ${version}`);
+  const PORT = process.env.PORT || serverOptions.port || 3000;
+	const HOST = '0.0.0.0';
 
-    if (serverOptions.startAllSession) startAllSessions(serverOptions, logger);
-  });
+	http.listen(PORT, HOST, () => {
+	  logger.info(`Server is running at http://${HOST}:${PORT}`);
+	  logger.info(
+		`🌐 Visit ${HOST}:${PORT}/api-docs for Swagger docs`
+	  );
+	  logger.info(`WPPConnect-Server version: ${version}`);
+
+	  if (serverOptions.startAllSession) startAllSessions(serverOptions, logger);
+	});
 
   if (config.log.level === 'error' || config.log.level === 'warn') {
     console.log(`\x1b[33m ======================================================
