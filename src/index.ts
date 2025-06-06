@@ -58,7 +58,7 @@ export function initServer(serverOptions: Partial<ServerOptions>): {
 
   const app = express();
   
-  const PORT = process.env.PORT || serverOptions.port || 3000;
+  const PORT = Number(process.env.PORT ?? serverOptions.port ?? 3000);
   const HOST = '0.0.0.0';
   
   app.use(cors());
